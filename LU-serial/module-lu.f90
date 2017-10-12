@@ -11,7 +11,19 @@ contains
     
     is = lbound(A)
     ie = ubound(A)
-    
+   
+    print*,is,ie
+
+    do k=is(2),ie(2)-1
+       do i=k+1,ie(1)
+          a(i,k) = a(i,k)/a(k,k)
+       end do
+       do j=k+1,ie(2)
+          do i=k+1,ie(1)
+             a(i,j) = a(i,j)-a(i,k)*a(k,j)
+          end do
+       end do
+    end do
     
   end subroutine LU_FACTORIZE
   !>
