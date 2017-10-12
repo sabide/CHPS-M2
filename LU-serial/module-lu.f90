@@ -33,9 +33,18 @@ contains
     real(kind=8),dimension(:)  ,allocatable :: Y,B
     integer :: i,j,k,n
     integer :: is(2),ie(2)
+   
     
     is = lbound(L)
     ie = ubound(L)
+
+    do i=is(1),ie(1)
+       do j=is(2),i-1
+          b(i) = b(i)-l(i,j)*y(j)
+       end do
+       y(i)=b(i)
+    end do
+    
     
   end subroutine L_SOLVE
   !>
@@ -48,6 +57,13 @@ contains
     
     is = lbound(U)
     ie = ubound(U)
+   
+    do i=ie(1),is(1),-1
+       do j=i+1,ie(2)
+          y(i) = y(i)-u(i,j)*x(j)
+       end do
+       x(i) = y(i)/u(i,i)
+    end do
     
   end subroutine U_SOLVE
 
