@@ -12,7 +12,6 @@ contains
     is = lbound(A)
     ie = ubound(A)
    
-    print*,is,ie
 
     do k=is(2),ie(2)-1
        do i=k+1,ie(1)
