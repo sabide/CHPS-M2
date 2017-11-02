@@ -12,6 +12,7 @@ contains
     is = lbound(A)
     ie = ubound(A)
    
+    print*,is,ie
 
     do k=is(2),ie(2)-1
        do i=k+1,ie(1)
@@ -46,6 +47,21 @@ contains
     
     
   end subroutine L_SOLVE
+
+  subroutine SOLVE(A,X,B,DG)
+    implicit none
+    real(kind=8),dimension(:,:),allocatable :: A !> matrice de départ
+    real(kind=8),dimension(:)  ,allocatable :: X,B,DG
+    integer :: i,j,k,n
+    integer :: is(2),ie(2)
+   
+    call LU_FACTORIZE(A)
+    call L_SOLVE(A,DG,B)
+    call U_SOLVE(A,X,DG)
+    
+  end subroutine SOLVE
+
+
   !>
   subroutine U_SOLVE(U,X,Y)
     implicit none
